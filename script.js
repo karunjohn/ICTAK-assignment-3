@@ -18,7 +18,21 @@ function login(e)
     } else {
       // perform operation with form input
       console.log("Login failed.")
-      document.cookie = "authenticated=false; SameSite=Strict";
+      deleteAuthenticationCookie()
     }
     return false;
+}
+
+function deleteAuthenticationCookie()
+{
+    document.cookie = "authenticated=; SameSite=Strict; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+}
+
+function logout(e)
+{
+    e.preventDefault();
+    console.log("Initiating logout.")
+    deleteAuthenticationCookie();
+    console.log("Logout completed. Redirecting to ./login.html .")
+    window.location.href = "./login.html";
 }
