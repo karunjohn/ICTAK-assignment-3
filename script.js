@@ -1,7 +1,6 @@
 function loadTodoFromWeb(e)
 {
     e.preventDefault();
-    console.log("hello")
         var xmlhttp = new XMLHttpRequest();
         var url = "https://jsonplaceholder.typicode.com/todos";
     
@@ -22,12 +21,11 @@ function loadTodoFromWeb(e)
             for(i = 0; i < response.length; i++) {
                 if(response[i].completed === true)
                 {
-                    console.log("disabled")
                     out += '<label class="list-group-item disabled" aria-disabled="true"><input class="form-check-input me-1" type="checkbox" value="" disabled="true" checked>' + response[i].title + '</label>';
                 }
                 else if(response[i].completed === false)
                 {
-                    out += '<label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="">' + response[i].title + '</label>';
+                    out += '<label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="" onclick="checkBoxClicked(this)">' + response[i].title + '</label>';
                 }
             }
             out += "</div>"
@@ -72,4 +70,21 @@ function logout(e)
     deleteAuthenticationCookie();
     console.log("Logout completed. Redirecting to ./login.html .")
     window.location.href = "./login.html";
+}
+
+function alertCongrats()
+{
+    alert("Congrats.")
+}
+
+function whenFiveChecked() {
+    return new Promise((resolve,reject) => {
+        if(count === 5)
+        {
+            resolve(count);
+        }
+        else{
+            reject("count not five.");
+        }
+    })
 }
