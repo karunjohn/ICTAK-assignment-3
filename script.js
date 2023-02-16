@@ -2,6 +2,38 @@ function loadTodoFromWeb(e)
 {
     e.preventDefault();
     console.log("hello")
+        var xmlhttp = new XMLHttpRequest();
+        var url = "https://jsonplaceholder.typicode.com/todos";
+    
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var response = JSON.parse(this.responseText);
+                renderTodoList(response);
+            }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+        
+        
+        function renderTodoList(response) {
+
+            var out = '<div class="list-group list-group-numbered">';
+            var i;
+            for(i = 0; i < response.length; i++) {
+                if(response[i].completed === true)
+                {
+                    console.log("disabled")
+                    out += '<label class="list-group-item disabled" aria-disabled="true"><input class="form-check-input me-1" type="checkbox" value="" disabled="true" checked>' + response[i].title + '</label>';
+                }
+                else if(response[i].completed === false)
+                {
+                    out += '<label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="">' + response[i].title + '</label>';
+                }
+            }
+            out += "</div>"
+            document.getElementById("webContent").innerHTML = out;
+        }
+   
 }
 
 function redirectToMain()
