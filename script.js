@@ -74,7 +74,7 @@ function logout(e)
 
 function alertCongrats()
 {
-    alert("Congrats.")
+    alert(" Congrats. 5 Tasks have been Successfully Completed ")
 }
 
 function whenFiveChecked() {
