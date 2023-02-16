@@ -4,7 +4,12 @@ function loadTodoFromWeb(e)
     console.log("hello")
 }
 
-function login(e)
+function redirectToMain()
+{
+    window.location.href = "./index.html";
+}
+
+function login(e, redirect)
 {
     e.preventDefault();
     console.log("Login initiated.")
@@ -14,13 +19,13 @@ function login(e)
     if (username.value === "admin" && password.value === "12345") {
         console.log("Login successful.")
         document.cookie = "authenticated=true; SameSite=Strict";
-        window.location.href = "./index.html";
+        // callback function
+        redirect();
     } else {
       // perform operation with form input
       console.log("Login failed.")
       deleteAuthenticationCookie()
     }
-    return false;
 }
 
 function deleteAuthenticationCookie()
