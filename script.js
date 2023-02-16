@@ -1,5 +1,8 @@
-let loginForm = document.getElementById("loginForm");
-loginForm.addEventListener("submit", login);
+function loadTodoFromWeb(e)
+{
+    e.preventDefault();
+    console.log("hello")
+}
 
 function login(e)
 {
@@ -10,10 +13,12 @@ function login(e)
   
     if (username.value === "admin" && password.value === "12345") {
         console.log("Login successful.")
-        window.location.href = "/index.html";
+        document.cookie = "authenticated=true; SameSite=Strict";
+        window.location.href = "./index.html";
     } else {
       // perform operation with form input
       console.log("Login failed.")
+      document.cookie = "authenticated=false; SameSite=Strict";
     }
     return false;
 }
